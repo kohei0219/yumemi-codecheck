@@ -15,7 +15,7 @@ final class SearchReposPresenterTests: XCTestCase {
     private var model: SearchReposModelDelegateMock!
     private var view: SearchReposViewDelegateMock!
     
-    private let repos: [RepoData] = [.init(avatarUrl: "avatar", forksCount: 2, fullName: "fullName", language: "language", openIssuesCount: 3, owner: ["avatar_url": "url"], stargazersCount: 4, watchersCount: 5)]
+    private let repos: [RepoData] = [.init(avatarUrl: "avatar", forksCount: 2, fullName: "fullName", htmlUrl: "htmlUrl", language: "language", openIssuesCount: 3, owner: ["avatar_url": "url"], stargazersCount: 4, watchersCount: 5)]
     
     override func setUp() {
         super.setUp()
@@ -53,6 +53,7 @@ final class SearchReposPresenterTests: XCTestCase {
             presenter.fetchRepos(searchWord: "hoge")
             XCTAssertEqual(model.fetchReposCallCount, 1)
             XCTAssertEqual(view.reloadDataCallCount, 0)
+            XCTAssertEqual(view.fetchFailedCallCount, 1)
         }
     }
     
@@ -78,5 +79,19 @@ final class SearchReposPresenterTests: XCTestCase {
         presenter.didTapCell(at: 0)
         XCTAssertEqual(presenter.selectedRepo?.fullName, repos[0].fullName)
         XCTAssertEqual(view.goDetailVCCallCount, 1)
+    }
+    
+    func test_updateSortStatus() {
+        XCTAssertEqual(presenter.sortStatus, .stars)
+        presenter.updateSortStatus()
+        XCTAssertEqual(presenter.sortStatus, .issues)
+        XCTAssertEqual(view.reloadDataCallCount, 1)
+        XCTAssertEqual(view.updateSortTitleCallCount, 1)
+        presenter.updateSortStatus()
+        XCTAssertEqual(presenter.sortStatus, .watchers)
+        presenter.updateSortStatus()
+        XCTAssertEqual(presenter.sortStatus, .forks)
+        presenter.updateSortStatus()
+        XCTAssertEqual(presenter.sortStatus, .stars)
     }
 }

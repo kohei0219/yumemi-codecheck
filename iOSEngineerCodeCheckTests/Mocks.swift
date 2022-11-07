@@ -30,6 +30,24 @@ class SearchReposViewDelegateMock: SearchReposViewDelegate {
             goDetailVCHandler()
         }
     }
+    
+    private(set) var fetchFailedCallCount = 0
+    var fetchFailedHandler: (() -> ())?
+    func fetchFailed(message: String) {
+        fetchFailedCallCount += 1
+        if let fetchFailedHandler = fetchFailedHandler {
+            fetchFailedHandler()
+        }
+    }
+    
+    private(set) var updateSortTitleCallCount = 0
+    var updateSortTitleHandler: (() -> ())?
+    func updateSortTitle() {
+        updateSortTitleCallCount += 1
+        if let updateSortTitleHandler = updateSortTitleHandler {
+            updateSortTitleHandler()
+        }
+    }
 }
 
 class SearchReposModelDelegateMock: SearchReposModelDelegate {
