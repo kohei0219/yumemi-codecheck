@@ -26,7 +26,7 @@ final class SearchReposViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SchBr.text = "GitHubのリポジトリを検索できるよー"
+        SchBr.text = Strings.searchPlaceHolder.getText()
         SchBr.delegate = self
     }
     
@@ -59,8 +59,7 @@ extension SearchReposViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchWord = searchBar.text, searchWord.count != 0 else { return }
-        presenter.fetchRepos(searchWord: searchWord)
+        presenter.fetchRepos(searchWord: searchBar.text)
     }
 }
 
@@ -73,7 +72,7 @@ extension SearchReposViewController: SearchReposViewDelegate {
     
     func goDetailVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let detailRepoVC = storyboard.instantiateViewController(identifier: "RepoDetailViewController") as? RepoDetailViewController,
+        guard let detailRepoVC = storyboard.instantiateViewController(identifier: VCIdentifiers.detailRepo.getId()) as? RepoDetailViewController,
               let repo = presenter.selectedRepo else {
             return
         }

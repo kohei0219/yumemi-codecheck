@@ -36,7 +36,7 @@ final class SearchReposPresenterTests: XCTestCase {
         XCTxContext("Repositoryの取得に成功すること") {
             model.fetchReposHandler = {
                 url, completion in
-                XCTAssertEqual(url, URL(string: "https://api.github.com/search/repositories?q=hoge"))
+                XCTAssertEqual(url, UrlFormatter.searchRepositories("hoge").getUrl())
                 completion(.success(self.repos))
             }
             presenter.fetchRepos(searchWord: "hoge")
@@ -47,7 +47,7 @@ final class SearchReposPresenterTests: XCTestCase {
         XCTxContext("データの取得に失敗すること") {
             model.fetchReposHandler = {
                 url, completion in
-                XCTAssertEqual(url, URL(string: "https://api.github.com/search/repositories?q=hoge"))
+                XCTAssertEqual(url, UrlFormatter.searchRepositories("hoge").getUrl())
                 completion(.failure(CommonError.fetchFailed))
             }
             presenter.fetchRepos(searchWord: "hoge")
