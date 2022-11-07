@@ -11,6 +11,13 @@ import UIKit
 final class SearchReposViewController: UITableViewController {
 
     @IBOutlet weak var SchBr: UISearchBar!
+    
+    private lazy var tableBackgroudLable: UILabel = {
+        let label = UILabel()
+        label.text = "検索結果がありません"
+        label.textAlignment = .center
+        return label
+    }()
         
     private var presenter: SearchReposPresenter!
     
@@ -66,6 +73,11 @@ extension SearchReposViewController: UISearchBarDelegate {
 extension SearchReposViewController: SearchReposViewDelegate {
     func reloadData() {
         DispatchQueue.main.async {
+            if self.presenter.numberOfRows() == 0 {
+                self.tableView.backgroundView = self.tableBackgroudLable
+            } else {
+                self.tableView.backgroundView = nil
+            }
             self.tableView.reloadData()
         }
     }
