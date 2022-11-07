@@ -12,9 +12,9 @@ final class SearchReposViewController: UITableViewController {
 
     @IBOutlet weak var SchBr: UISearchBar!
     
-    var repo: [[String: Any]] = []
+    var repos: [RepoData] = []
     var idx: Int!
-    private var searchRepo: URLSessionTask?
+    private var searchRepos: URLSessionTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +29,14 @@ final class SearchReposViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        repo.count
+        repos.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let rp = repo[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
+        let rp = repos[indexPath.row]
+        cell.textLabel?.text = rp.fullName
+        cell.detailTextLabel?.text = rp.language
         cell.tag = indexPath.row
         return cell
     }
@@ -55,21 +55,21 @@ extension SearchReposViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchRepo?.cancel()
+        searchRepos?.cancel()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text, searchWord.count != 0 else { return }
         let url = "https://api.github.com/search/repositories?q=\(searchWord)"
-        searchRepo = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
-            if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any], let items = obj["items"] as? [[String: Any]] {
-                self.repo = items
+        searchRepos = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
+            if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
+                self.repos = RepoData.mapData(obj)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
         }
         // リストを更新する
-        searchRepo?.resume()
+        searchRepos?.resume()
     }
 }

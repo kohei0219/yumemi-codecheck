@@ -23,20 +23,18 @@ final class RepoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repo = searchRepoVC.repo[searchRepoVC.idx]
-        
-        LangLbl.text = "Written in \(repo["language"] as? String ?? "")"
-        StrsLbl.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
-        WchsLbl.text = "\(repo["wachers_count"] as? Int ?? 0) watchers"
-        FrksLbl.text = "\(repo["forks_count"] as? Int ?? 0) forks"
-        IsssLbl.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
+        setRepoData(repo: searchRepoVC.repos[searchRepoVC.idx])
     }
     
-    private func getImage() {
-        let repo = searchRepoVC.repo[searchRepoVC.idx]
-        TtlLbl.text = repo["full_name"] as? String
-        guard let owner = repo["owner"] as? [String: Any], let imgURL = owner["avatar_url"] as? String else {
+    private func setRepoData(repo: RepoData) {
+        LangLbl.text = "Written in \(repo.language)"
+        StrsLbl.text = "\(repo.stargazersCount) stars"
+        WchsLbl.text = "\(repo.wachersCount) watchers"
+        FrksLbl.text = "\(repo.forksCount) forks"
+        IsssLbl.text = "\(repo.openIssuesCount) open issues"
+        TtlLbl.text = repo.fullName
+        // 画像を取得する
+        guard let imgURL = repo.owner["avatar_url"] as? String else {
             return
         }
         URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
