@@ -53,9 +53,16 @@
                             <outlet property="delegate" destination="MOh-CZ-3ki" id="A6Y-Dm-cjQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="リポジトリ検索" id="ktq-eC-ZBq"/>
+                    <navigationItem key="navigationItem" title="リポジトリ検索" id="ktq-eC-ZBq">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="Jpe-aR-gV1">
+                            <connections>
+                                <action selector="didTapSort:" destination="MOh-CZ-3ki" id="R3L-A0-pRM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="SchBr" destination="6rq-CD-Hob" id="3gq-mK-4M3"/>
+                        <outlet property="SortButton" destination="Jpe-aR-gV1" id="hH4-Mb-m7i"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xer-fe-JeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
