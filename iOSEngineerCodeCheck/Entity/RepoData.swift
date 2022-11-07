@@ -21,7 +21,6 @@ public struct RepoData {
         let items = obj["items"] as? [[String: Any]] ?? []
         var repos: [RepoData] = []
         for item in items {
-            print(item)
             repos.append(.init(
                 avatarUrl: item["avatar_url"] as? String ?? "",
                 forksCount: item["forks_count"] as? Int ?? 0,
