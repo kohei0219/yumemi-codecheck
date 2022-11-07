@@ -42,7 +42,7 @@ final class SearchReposViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let rp = presenter.cellViewData(at: indexPath.row)
         cell.textLabel?.text = rp.fullName
         cell.detailTextLabel?.text = rp.language
