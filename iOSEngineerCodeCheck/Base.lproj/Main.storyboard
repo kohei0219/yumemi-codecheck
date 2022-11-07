@@ -208,10 +208,10 @@
                             <constraint firstItem="eqt-1t-WgA" firstAttribute="width" secondItem="4gp-25-lRZ" secondAttribute="width" multiplier="0.4" id="9zZ-a2-K36"/>
                             <constraint firstItem="zq5-VA-zWW" firstAttribute="top" secondItem="4gp-25-lRZ" secondAttribute="top" id="AHw-vV-tg1"/>
                             <constraint firstItem="4q1-pG-WSB" firstAttribute="top" secondItem="Iim-eb-8Ad" secondAttribute="bottom" constant="28" id="G2L-KM-330"/>
-                            <constraint firstItem="4q1-pG-WSB" firstAttribute="centerX" secondItem="Iim-eb-8Ad" secondAttribute="centerX" id="Ght-Nb-HEu"/>
                             <constraint firstItem="srK-fe-i1b" firstAttribute="trailing" secondItem="0gb-01-GLC" secondAttribute="trailing" constant="24" id="Gq0-Mq-J4P"/>
                             <constraint firstItem="s3M-QO-Kom" firstAttribute="leading" secondItem="srK-fe-i1b" secondAttribute="leading" constant="24" id="HMD-FY-uE8"/>
                             <constraint firstItem="Iim-eb-8Ad" firstAttribute="top" secondItem="srK-fe-i1b" secondAttribute="top" constant="44" id="RCr-nM-5aG"/>
+                            <constraint firstItem="Iim-eb-8Ad" firstAttribute="centerX" secondItem="4gp-25-lRZ" secondAttribute="centerX" id="SD8-iX-gQK"/>
                             <constraint firstItem="s3M-QO-Kom" firstAttribute="top" secondItem="4q1-pG-WSB" secondAttribute="bottom" constant="16" id="UWh-sd-Wcn"/>
                             <constraint firstItem="zq5-VA-zWW" firstAttribute="bottom" secondItem="s3M-QO-Kom" secondAttribute="bottom" constant="16" id="UlC-lo-b2G"/>
                             <constraint firstItem="srK-fe-i1b" firstAttribute="bottom" secondItem="eqt-1t-WgA" secondAttribute="bottom" constant="40" id="aTQ-0H-Spr"/>

@@ -14,8 +14,8 @@ extension UIViewController {
         let message = message
         let okText = "OK"
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okayButton = UIAlertAction(title: okText, style: UIAlertAction.Style.cancel, handler: nil)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okayButton = UIAlertAction(title: okText, style: .cancel, handler: nil)
         alert.addAction(okayButton)
         
         self.present(alert, animated: true, completion: nil)

@@ -49,7 +49,11 @@ final class RepoDetailViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.tintColor = .mainBlue
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(didTapBookmark))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .bookmarks,
+            target: self,
+            action: #selector(didTapBookmark)
+        )
         setRepoData()
     }
     
@@ -66,7 +70,7 @@ final class RepoDetailViewController: UIViewController {
     
     private func setRepoData() {
         LangLbl.text = presenter.language
-        StrsLbl.text = presenter.starts
+        StrsLbl.text = presenter.stars
         WchsLbl.text = presenter.watchers
         FrksLbl.text = presenter.forks
         IsssLbl.text = presenter.issues
@@ -76,7 +80,7 @@ final class RepoDetailViewController: UIViewController {
     
     @IBAction func openGitLink(_ sender: Any) {
         guard let url = presenter.gitLink else {
-            showError(message: "リンクのの取得に失敗しました")
+            showError(message: CommonError.fetchLinkFailed.localizedDescription)
             return
         }
         UIApplication.shared.open(url)
@@ -90,7 +94,7 @@ final class RepoDetailViewController: UIViewController {
 extension RepoDetailViewController: RepoDetailViewDelegate {
     func setImage(data: Data) {
         guard let img = UIImage(data: data) else {
-            showError(message: "画像の取得に失敗しました")
+            showError(message: CommonError.fetchImageFailed.localizedDescription)
             return
         }
         DispatchQueue.main.async {
