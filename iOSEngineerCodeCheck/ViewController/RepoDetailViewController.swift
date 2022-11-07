@@ -55,6 +55,8 @@ final class RepoDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // 画面が小さすぎたらボタンを消す
+        self.VisitButton.isHidden = self.view.frame.width <= 320
         // グラデーションをつけるが下に余白を作る（角丸のために）
         self.ProfileBackgroundView.profileGradation(
             startColor: UIColor.white.cgColor,
