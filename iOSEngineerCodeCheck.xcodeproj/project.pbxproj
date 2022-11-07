@@ -24,6 +24,7 @@
 		83CAA2302919254300BDACC0 /* RoundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA22F2919254300BDACC0 /* RoundImage.swift */; };
 		83CAA23229192A4600BDACC0 /* GradationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA23129192A4600BDACC0 /* GradationView.swift */; };
 		83CAA23429192F3700BDACC0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA23329192F3700BDACC0 /* Color.swift */; };
+		83CAA236291937DA00BDACC0 /* ShowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA235291937DA00BDACC0 /* ShowError.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepoDetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -68,6 +69,7 @@
 		83CAA22F2919254300BDACC0 /* RoundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImage.swift; sourceTree = "<group>"; };
 		83CAA23129192A4600BDACC0 /* GradationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradationView.swift; sourceTree = "<group>"; };
 		83CAA23329192F3700BDACC0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		83CAA235291937DA00BDACC0 /* ShowError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowError.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				83CAA22F2919254300BDACC0 /* RoundImage.swift */,
 				83CAA23129192A4600BDACC0 /* GradationView.swift */,
 				83CAA23329192F3700BDACC0 /* Color.swift */,
+				83CAA235291937DA00BDACC0 /* ShowError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				83CAA2152918EA9E00BDACC0 /* RepoDetailModel.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				83CAA2302919254300BDACC0 /* RoundImage.swift in Sources */,
+				83CAA236291937DA00BDACC0 /* ShowError.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 				83CAA22E2919073700BDACC0 /* VCIdentifiers.swift in Sources */,
 				83CAA21A2918EBDD00BDACC0 /* RepoDetailPresenter.swift in Sources */,

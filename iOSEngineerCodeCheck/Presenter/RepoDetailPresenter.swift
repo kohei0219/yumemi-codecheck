@@ -44,22 +44,26 @@ final class RepoDetailPresenter: PresenterProtocol {
     }
     
     var starts: String {
-        "\(repo.stargazersCount)\nstars"
+        repo.stargazersCount.description
     }
     
     var watchers: String {
-        "\(repo.watchersCount)\nwatchers"
+        repo.watchersCount.description
     }
     
     var forks: String {
-        "\(repo.forksCount)\nforks"
+        repo.forksCount.description
     }
     
     var issues: String {
-        "\(repo.openIssuesCount)\nopen issues"
+        repo.openIssuesCount.description
     }
     
     var title: String {
         repo.fullName
+    }
+    
+    var gitLink: URL? {
+        URL(string: repo.htmlUrl)
     }
 }

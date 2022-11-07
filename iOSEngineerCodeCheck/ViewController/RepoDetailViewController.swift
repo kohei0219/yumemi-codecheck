@@ -52,11 +52,22 @@ final class RepoDetailViewController: UIViewController {
         TtlLbl.text = presenter.title
         presenter.fetchImage()
     }
+    
+    @IBAction func openGitLink(_ sender: Any) {
+        guard let url = presenter.gitLink else {
+            showError(message: "リンクのの取得に失敗しました")
+            return
+        }
+        UIApplication.shared.open(url)
+    }
 }
 
 extension RepoDetailViewController: RepoDetailViewDelegate {
     func setImage(data: Data) {
-        guard let img = UIImage(data: data) else { return }
+        guard let img = UIImage(data: data) else {
+            showError(message: "画像の取得に失敗しました")
+            return
+        }
         DispatchQueue.main.async {
             self.ImgView.image = img.roundImage()
         }
