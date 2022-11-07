@@ -13,12 +13,7 @@ final class RepoDetailViewController: UIViewController {
     @IBOutlet weak var ImgView: UIImageView!
     @IBOutlet weak var ProfileBackgroundView: UIView! {
         didSet {
-            // グラデーションをつけるが下に余白を作る（角丸のために）
             self.ProfileBackgroundView.backgroundColor = .mainBlue
-            self.ProfileBackgroundView.profileGradation(
-                startColor: UIColor.white.cgColor,
-                endColor: UIColor.mainBlue.cgColor
-            )
             // 下部を角丸に
             self.ProfileBackgroundView.layer.cornerRadius = 32
             self.ProfileBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -56,6 +51,15 @@ final class RepoDetailViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .mainBlue
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(didTapBookmark))
         setRepoData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // グラデーションをつけるが下に余白を作る（角丸のために）
+        self.ProfileBackgroundView.profileGradation(
+            startColor: UIColor.white.cgColor,
+            endColor: UIColor.mainBlue.cgColor
+        )
     }
     
     private func setRepoData() {
