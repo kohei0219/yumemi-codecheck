@@ -37,11 +37,12 @@ final class RepoDetailViewController: UIViewController {
         IsssLbl.text = "\(repo.openIssuesCount) open issues"
         TtlLbl.text = repo.fullName
         // 画像を取得する
-        guard let imgURL = repo.owner["avatar_url"] as? String else { return }
-        URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-            let img = UIImage(data: data!)!
-            DispatchQueue.main.async {
-                self.ImgView.image = img
+        guard let avatarURL = repo.owner["avatar_url"] as? String, let imgURL = URL(string: avatarURL) else { return }
+        URLSession.shared.dataTask(with: imgURL) { [weak self] (data, res, err) in
+            if let data = data, let img = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self?.ImgView.image = img
+                }
             }
         }
         .resume()
