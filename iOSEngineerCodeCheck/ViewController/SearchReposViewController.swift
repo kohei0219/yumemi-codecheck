@@ -87,9 +87,14 @@ extension SearchReposViewController: SearchReposViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let detailRepoVC = storyboard.instantiateViewController(identifier: VCIdentifiers.detailRepo.getId()) as? RepoDetailViewController,
               let repo = presenter.selectedRepo else {
+            showError(message: "画面の移動に失敗しました")
             return
         }
         detailRepoVC.assemble(repo: repo)
         navigationController?.pushViewController(detailRepoVC, animated: true)
+    }
+    
+    func fetchFailed(message: String) {
+        showError(message: message)
     }
 }

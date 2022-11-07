@@ -10,6 +10,7 @@ import Foundation
 
 protocol RepoDetailViewDelegate: AnyObject {
     func setImage(data: Data)
+    func fetchFailed(message: String)
 }
 
 final class RepoDetailPresenter: PresenterProtocol {
@@ -34,7 +35,8 @@ final class RepoDetailPresenter: PresenterProtocol {
             switch result {
             case .success(let data):
                 self?.view.setImage(data: data)
-            case .failure: break
+            case .failure(let error):
+                self?.view.fetchFailed(message: error.localizedDescription)
             }
         }
     }

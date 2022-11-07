@@ -72,4 +72,8 @@ extension RepoDetailViewController: RepoDetailViewDelegate {
             self.ImgView.image = img.roundImage()
         }
     }
+    
+    func fetchFailed(message: String) {
+        showError(message: message)
+    }
 }
