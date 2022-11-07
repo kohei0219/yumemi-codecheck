@@ -45,7 +45,7 @@ final class RepoDetailPresenter: PresenterProtocol {
         "Written in \(repo.language)"
     }
     
-    var starts: String {
+    var stars: String {
         repo.stargazersCount.description
     }
     
