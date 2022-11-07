@@ -15,16 +15,17 @@ final class SearchReposViewController: UITableViewController {
     var repos: [RepoData] = []
     var idx: Int!
     private var searchRepos: URLSessionTask?
+    private let repoDetailIdentifier = "showRepoDetail"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         SchBr.text = "GitHubのリポジトリを検索できるよー"
         SchBr.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "Detail", let dtl = segue.destination as? RepoDetailViewController else { return }
+        guard segue.identifier == repoDetailIdentifier, let dtl = segue.destination as? RepoDetailViewController else { return }
         dtl.searchRepoVC = self
     }
     
@@ -44,7 +45,7 @@ final class SearchReposViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 画面遷移時にセルのindexを保存しておく
         idx = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        performSegue(withIdentifier: repoDetailIdentifier, sender: self)
     }
 }
 
