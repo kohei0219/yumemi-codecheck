@@ -12,6 +12,14 @@ protocol SearchReposViewDelegate: AnyObject {
     func reloadData()
     func goDetailVC()
     func fetchFailed(message: String)
+    func updateSortTitle()
+}
+
+public enum SearchRepoSortStatus: String {
+    case stars = "Stars"
+    case issues = "Issues"
+    case watchers = "Watchers"
+    case forks = "Forks"
 }
 
 final class SearchReposPresenter: PresenterProtocol {
@@ -23,6 +31,7 @@ final class SearchReposPresenter: PresenterProtocol {
     
     private var repos: [RepoData] = []
     private(set) var selectedRepo: RepoData?
+    private(set) var sortStatus: SearchRepoSortStatus = .stars
     
     init(model: Model, view: View) {
         self.model = model
@@ -38,6 +47,7 @@ final class SearchReposPresenter: PresenterProtocol {
             switch result {
             case .success(let repos):
                 self?.repos = repos
+                self?.sortRepos()
                 self?.view.reloadData()
             case .failure(let error):
                 self?.view.fetchFailed(message: error.localizedDescription)
@@ -60,5 +70,34 @@ final class SearchReposPresenter: PresenterProtocol {
     func didTapCell(at index: Int) {
         selectedRepo = cellViewData(at: index)
         view.goDetailVC()
+    }
+    
+    func sortRepos() {
+        switch sortStatus {
+        case .stars:
+            repos.sort { $0.stargazersCount > $1.stargazersCount }
+        case .issues:
+            repos.sort { $0.openIssuesCount > $1.openIssuesCount }
+        case .watchers:
+            repos.sort { $0.watchersCount > $1.watchersCount }
+        case .forks:
+            repos.sort { $0.forksCount > $1.forksCount }
+        }
+    }
+    
+    func updateSortStatus() {
+        switch sortStatus {
+        case .stars:
+            sortStatus = .issues
+        case .issues:
+            sortStatus = .watchers
+        case .watchers:
+            sortStatus = .forks
+        case .forks:
+            sortStatus = .stars
+        }
+        sortRepos()
+        view.reloadData()
+        view.updateSortTitle()
     }
 }

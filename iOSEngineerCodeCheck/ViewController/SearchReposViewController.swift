@@ -11,6 +11,11 @@ import UIKit
 final class SearchReposViewController: UITableViewController {
 
     @IBOutlet weak var SchBr: UISearchBar!
+    @IBOutlet weak var SortButton: UIBarButtonItem! {
+        didSet {
+            self.SortButton.title = self.presenter.sortStatus.rawValue
+        }
+    }
     
     private lazy var tableBackgroudLable: UILabel = {
         let label = UILabel()
@@ -54,6 +59,10 @@ final class SearchReposViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didTapCell(at: indexPath.row)
     }
+    
+    @IBAction func didTapSort(_ sender: Any) {
+        presenter.updateSortStatus()
+    }
 }
 
 extension SearchReposViewController: UISearchBarDelegate {
@@ -96,5 +105,9 @@ extension SearchReposViewController: SearchReposViewDelegate {
     
     func fetchFailed(message: String) {
         showError(message: message)
+    }
+    
+    func updateSortTitle() {
+        SortButton.title = presenter.sortStatus.rawValue
     }
 }
