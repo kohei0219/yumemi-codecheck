@@ -12,8 +12,8 @@ final class SearchReposViewController: UITableViewController {
 
     @IBOutlet weak var SchBr: UISearchBar!
     
-    var repos: [RepoData] = []
-    var idx: Int!
+    private var repos: [RepoData] = []
+    private var selectedIdx: Int?
     private var searchRepos: URLSessionTask?
     private let repoDetailIdentifier = "showRepoDetail"
     
@@ -25,8 +25,11 @@ final class SearchReposViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == repoDetailIdentifier, let dtl = segue.destination as? RepoDetailViewController else { return }
-        dtl.searchRepoVC = self
+        guard segue.identifier == repoDetailIdentifier,
+              let repoDetailVC = segue.destination as? RepoDetailViewController,
+              let selectedIdx = selectedIdx
+        else { return }
+        repoDetailVC.repo = repos[selectedIdx]
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,7 +47,7 @@ final class SearchReposViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 画面遷移時にセルのindexを保存しておく
-        idx = indexPath.row
+        selectedIdx = indexPath.row
         performSegue(withIdentifier: repoDetailIdentifier, sender: self)
     }
 }
