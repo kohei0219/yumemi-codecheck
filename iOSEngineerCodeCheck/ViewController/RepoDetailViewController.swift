@@ -22,6 +22,11 @@ final class RepoDetailViewController: UIViewController {
             // 下部を角丸に
             self.ProfileBackgroundView.layer.cornerRadius = 32
             self.ProfileBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            //　影をつける
+            self.ProfileBackgroundView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+            self.ProfileBackgroundView.layer.shadowColor = UIColor.black.cgColor
+            self.ProfileBackgroundView.layer.shadowOpacity = 0.6
+            self.ProfileBackgroundView.layer.shadowRadius = 4
         }
     }
     @IBOutlet weak var TtlLbl: UILabel!
@@ -30,6 +35,14 @@ final class RepoDetailViewController: UIViewController {
     @IBOutlet weak var WchsLbl: UILabel!
     @IBOutlet weak var FrksLbl: UILabel!
     @IBOutlet weak var IsssLbl: UILabel!
+    @IBOutlet weak var VisitButton: UIButton! {
+        didSet {
+            self.VisitButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+            self.VisitButton.layer.shadowColor = UIColor.black.cgColor
+            self.VisitButton.layer.shadowOpacity = 0.6
+            self.VisitButton.layer.shadowRadius = 4
+        }
+    }
     
     private var presenter: RepoDetailPresenter!
     
@@ -40,6 +53,7 @@ final class RepoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(didTapBookmark))
         setRepoData()
     }
     
@@ -59,6 +73,10 @@ final class RepoDetailViewController: UIViewController {
             return
         }
         UIApplication.shared.open(url)
+    }
+    
+    @objc private func didTapBookmark() {
+        showError(message: "この機能は実装していません！")
     }
 }
 
