@@ -28,10 +28,11 @@ final class SearchReposPresenter: PresenterProtocol {
         self.view = view
     }
     
-    func fetchRepos(searchWord: String) {
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else {
-            return
-        }
+    func fetchRepos(searchWord: String?) {
+        guard let searchWord = searchWord,
+              searchWord.count != 0,
+              let url = UrlFormatter.searchRepositories(searchWord).getUrl()
+        else { return }
         model.fetchRepos(url: url) { [weak self] result in
             switch result {
             case .success(let repos):

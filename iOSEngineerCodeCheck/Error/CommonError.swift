@@ -14,7 +14,7 @@ public enum CommonError: Error, LocalizedError, Equatable {
     public var errorDescription: String? {
         switch self {
         case .fetchFailed:
-            return "データが取得に失敗しました"
+            return "データの取得に失敗しました"
         }
     }
 }
