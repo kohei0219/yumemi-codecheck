@@ -65,11 +65,11 @@ extension SearchReposViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text, searchWord.count != 0 else { return }
         let url = "https://api.github.com/search/repositories?q=\(searchWord)"
-        searchRepos = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
+        searchRepos = URLSession.shared.dataTask(with: URL(string: url)!) { [weak self] (data, res, err) in
             if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                self.repos = RepoData.mapData(obj)
+                self?.repos = RepoData.mapData(obj)
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
             }
         }
