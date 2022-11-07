@@ -28,7 +28,7 @@ public struct RepoData {
                 openIssuesCount: item["open_issues_count"] as? Int ?? 0,
                 owner: item["owner"] as? [String: Any] ?? [:],
                 stargazersCount: item["stargazers_count"] as? Int ?? 0,
-                wachersCount: item["wachers_count"] as? Int ?? 0
+                wachersCount: item["watchers_count"] as? Int ?? 0
             ))
         }
         return repos
