@@ -14,7 +14,7 @@ public struct RepoData {
     let openIssuesCount: Int
     let owner: [String: Any]
     let stargazersCount: Int
-    let wachersCount: Int
+    let watchersCount: Int
     
     static func mapData(_ obj: [String: Any]) -> [RepoData] {
         let items = obj["items"] as? [[String: Any]] ?? []
@@ -28,7 +28,7 @@ public struct RepoData {
                 openIssuesCount: item["open_issues_count"] as? Int ?? 0,
                 owner: item["owner"] as? [String: Any] ?? [:],
                 stargazersCount: item["stargazers_count"] as? Int ?? 0,
-                wachersCount: item["watchers_count"] as? Int ?? 0
+                watchersCount: item["watchers_count"] as? Int ?? 0
             ))
         }
         return repos

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SearchReposModelDelegate {
-    func fetchRepos(url: URL,  completion: @escaping (Result<[RepoData], Error>) -> Void)
+    func fetchRepos(url: URL, completion: @escaping (Result<[RepoData], Error>) -> Void)
     func cancelFetchRepos()
 }
 
@@ -20,6 +20,8 @@ final class SearchReposModel: SearchReposModelDelegate {
         searchRepos = URLSession.shared.dataTask(with: url) { (data, res, err) in
             if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
                 completion(.success(RepoData.mapData(obj)))
+            } else {
+                completion(.failure(CommonError.fetchFailed))
             }
         }
         // リストを更新する

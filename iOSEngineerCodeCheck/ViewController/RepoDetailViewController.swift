@@ -18,33 +18,34 @@ final class RepoDetailViewController: UIViewController {
     @IBOutlet weak var FrksLbl: UILabel!
     @IBOutlet weak var IsssLbl: UILabel!
     
-    var repo: RepoData?
+    private var presenter: RepoDetailPresenter!
+    
+    func assemble(repo: RepoData) {
+        presenter = .init(model: RepoDetailModel(), view: self, repo: repo)
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setRepoData(repo)
+        setRepoData()
     }
     
-    private func setRepoData(_ repo: RepoData?) {
-        guard let repo = repo else {
-            return
+    private func setRepoData() {
+        LangLbl.text = presenter.language
+        StrsLbl.text = presenter.starts
+        WchsLbl.text = presenter.watchers
+        FrksLbl.text = presenter.forks
+        IsssLbl.text = presenter.issues
+        TtlLbl.text = presenter.title
+        presenter.fetchImage()
+    }
+}
+
+extension RepoDetailViewController: RepoDetailViewDelegate {
+    func setImage(data: Data) {
+        guard let img = UIImage(data: data) else { return }
+        DispatchQueue.main.async {
+            self.ImgView.image = img
         }
-        LangLbl.text = "Written in \(repo.language)"
-        StrsLbl.text = "\(repo.stargazersCount) stars"
-        WchsLbl.text = "\(repo.wachersCount) watchers"
-        FrksLbl.text = "\(repo.forksCount) forks"
-        IsssLbl.text = "\(repo.openIssuesCount) open issues"
-        TtlLbl.text = repo.fullName
-        // 画像を取得する
-        guard let avatarURL = repo.owner["avatar_url"] as? String, let imgURL = URL(string: avatarURL) else { return }
-        URLSession.shared.dataTask(with: imgURL) { [weak self] (data, res, err) in
-            if let data = data, let img = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self?.ImgView.image = img
-                }
-            }
-        }
-        .resume()
     }
 }

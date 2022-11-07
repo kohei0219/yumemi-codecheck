@@ -30,14 +30,6 @@ final class SearchReposViewController: UITableViewController {
         SchBr.delegate = self
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == presenter.repoDetailIdentifier,
-              let repoDetailVC = segue.destination as? RepoDetailViewController,
-              let repo = presenter.selectedRepo
-        else { return }
-        repoDetailVC.repo = repo
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.numberOfRows()
     }
@@ -52,7 +44,6 @@ final class SearchReposViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時にセルのindexを保存しておく
         presenter.didTapCell(at: indexPath.row)
     }
 }
@@ -81,6 +72,12 @@ extension SearchReposViewController: SearchReposViewDelegate {
     }
     
     func goDetailVC() {
-        performSegue(withIdentifier: presenter.repoDetailIdentifier, sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailRepoVC = storyboard.instantiateViewController(identifier: "RepoDetailViewController") as? RepoDetailViewController,
+              let repo = presenter.selectedRepo else {
+            return
+        }
+        detailRepoVC.assemble(repo: repo)
+        navigationController?.pushViewController(detailRepoVC, animated: true)
     }
 }

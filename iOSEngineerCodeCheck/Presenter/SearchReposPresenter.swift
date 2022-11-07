@@ -22,7 +22,6 @@ final class SearchReposPresenter: PresenterProtocol {
     
     private var repos: [RepoData] = []
     private(set) var selectedRepo: RepoData?
-    let repoDetailIdentifier = "showRepoDetail"
     
     init(model: Model, view: View) {
         self.model = model
