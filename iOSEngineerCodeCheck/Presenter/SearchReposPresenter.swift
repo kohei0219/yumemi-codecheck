@@ -16,7 +16,7 @@ protocol SearchReposViewDelegate: AnyObject {
 }
 
 public enum SearchRepoSortStatus: String {
-    case stars = "Starts"
+    case stars = "Stars"
     case issues = "Issues"
     case watchers = "Watchers"
     case forks = "Forks"

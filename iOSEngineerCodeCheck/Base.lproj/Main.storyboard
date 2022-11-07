@@ -55,6 +55,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="リポジトリ検索" id="ktq-eC-ZBq">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="Jpe-aR-gV1">
+                            <color key="tintColor" name="appBlue"/>
                             <connections>
                                 <action selector="didTapSort:" destination="MOh-CZ-3ki" id="R3L-A0-pRM"/>
                             </connections>
@@ -244,6 +245,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iRk-f0-Qkc">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="appBlue"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="MOh-CZ-3ki" kind="relationship" relationship="rootViewController" id="tOh-FN-tGd"/>
