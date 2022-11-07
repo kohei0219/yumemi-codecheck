@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8335C22E2918ADD4000BA858 /* RepoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335C22D2918ADD4000BA858 /* RepoData.swift */; };
+		83CAA20E2918E04700BDACC0 /* SearchReposPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA20D2918E04700BDACC0 /* SearchReposPresenter.swift */; };
+		83CAA2102918E05300BDACC0 /* SearchReposModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA20F2918E05300BDACC0 /* SearchReposModel.swift */; };
+		83CAA2132918E1DE00BDACC0 /* PresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA2122918E1DE00BDACC0 /* PresenterProtocol.swift */; };
+		83CAA2152918EA9E00BDACC0 /* RepoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA2142918EA9E00BDACC0 /* RepoDetailModel.swift */; };
+		83CAA2182918EB7A00BDACC0 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA2172918EB7A00BDACC0 /* CommonError.swift */; };
+		83CAA21A2918EBDD00BDACC0 /* RepoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CAA2192918EBDD00BDACC0 /* RepoDetailPresenter.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepoDetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -38,6 +44,12 @@
 
 /* Begin PBXFileReference section */
 		8335C22D2918ADD4000BA858 /* RepoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoData.swift; sourceTree = "<group>"; };
+		83CAA20D2918E04700BDACC0 /* SearchReposPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReposPresenter.swift; sourceTree = "<group>"; };
+		83CAA20F2918E05300BDACC0 /* SearchReposModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReposModel.swift; sourceTree = "<group>"; };
+		83CAA2122918E1DE00BDACC0 /* PresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterProtocol.swift; sourceTree = "<group>"; };
+		83CAA2142918EA9E00BDACC0 /* RepoDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailModel.swift; sourceTree = "<group>"; };
+		83CAA2172918EB7A00BDACC0 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		83CAA2192918EBDD00BDACC0 /* RepoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailPresenter.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +100,49 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		83CAA20A2918E01800BDACC0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945E2244DC5E80012785A /* SearchReposViewController.swift */,
+				BF0A658C244F2A3B00280FA6 /* RepoDetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		83CAA20B2918E02C00BDACC0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				83CAA20D2918E04700BDACC0 /* SearchReposPresenter.swift */,
+				83CAA2192918EBDD00BDACC0 /* RepoDetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		83CAA20C2918E03400BDACC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83CAA20F2918E05300BDACC0 /* SearchReposModel.swift */,
+				83CAA2142918EA9E00BDACC0 /* RepoDetailModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83CAA2112918E19100BDACC0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				83CAA2122918E1DE00BDACC0 /* PresenterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		83CAA2162918EB6C00BDACC0 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				83CAA2172918EB7A00BDACC0 /* CommonError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -111,11 +166,14 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				83CAA2162918EB6C00BDACC0 /* Error */,
+				83CAA2112918E19100BDACC0 /* Protocols */,
+				83CAA20C2918E03400BDACC0 /* Model */,
+				83CAA20B2918E02C00BDACC0 /* Presenter */,
+				83CAA20A2918E01800BDACC0 /* ViewController */,
 				8335C22C2918ADB0000BA858 /* Entity */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				BFD945E2244DC5E80012785A /* SearchReposViewController.swift */,
-				BF0A658C244F2A3B00280FA6 /* RepoDetailViewController.swift */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
@@ -275,9 +333,15 @@
 			files = (
 				BFD945E3244DC5E80012785A /* SearchReposViewController.swift in Sources */,
 				8335C22E2918ADD4000BA858 /* RepoData.swift in Sources */,
+				83CAA20E2918E04700BDACC0 /* SearchReposPresenter.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* RepoDetailViewController.swift in Sources */,
+				83CAA2132918E1DE00BDACC0 /* PresenterProtocol.swift in Sources */,
+				83CAA2182918EB7A00BDACC0 /* CommonError.swift in Sources */,
+				83CAA2152918EA9E00BDACC0 /* RepoDetailModel.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
+				83CAA21A2918EBDD00BDACC0 /* RepoDetailPresenter.swift in Sources */,
+				83CAA2102918E05300BDACC0 /* SearchReposModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
