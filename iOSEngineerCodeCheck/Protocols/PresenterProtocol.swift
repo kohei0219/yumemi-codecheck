@@ -1,0 +1,16 @@
+//
+//  PresenterProtocol.swift
+//  iOSEngineerCodeCheck
+//
+//  Created by 盛野晃平 on 2022/11/07.
+//  Copyright © 2022 YUMEMI Inc. All rights reserved.
+//
+
+protocol PresenterProtocol {
+    associatedtype View
+    associatedtype Model
+    
+    var view: View { get }
+    var model: Model { get }
+}
+

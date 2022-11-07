@@ -11,11 +11,17 @@ import UIKit
 final class SearchReposViewController: UITableViewController {
 
     @IBOutlet weak var SchBr: UISearchBar!
+        
+    private var presenter: SearchReposPresenter!
     
-    private var repos: [RepoData] = []
-    private var selectedIdx: Int?
-    private var searchRepos: URLSessionTask?
-    private let repoDetailIdentifier = "showRepoDetail"
+    private func assemble() {
+        presenter = .init(model: SearchReposModel(), view: self)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        assemble()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,20 +31,20 @@ final class SearchReposViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == repoDetailIdentifier,
+        guard segue.identifier == presenter.repoDetailIdentifier,
               let repoDetailVC = segue.destination as? RepoDetailViewController,
-              let selectedIdx = selectedIdx
+              let repo = presenter.selectedRepo
         else { return }
-        repoDetailVC.repo = repos[selectedIdx]
+        repoDetailVC.repo = repo
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        repos.count
+        presenter.numberOfRows()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let rp = repos[indexPath.row]
+        let rp = presenter.cellViewData(at: indexPath.row)
         cell.textLabel?.text = rp.fullName
         cell.detailTextLabel?.text = rp.language
         cell.tag = indexPath.row
@@ -47,8 +53,7 @@ final class SearchReposViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 画面遷移時にセルのindexを保存しておく
-        selectedIdx = indexPath.row
-        performSegue(withIdentifier: repoDetailIdentifier, sender: self)
+        presenter.didTapCell(at: indexPath.row)
     }
 }
 
@@ -59,21 +64,23 @@ extension SearchReposViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchRepos?.cancel()
+        presenter.cacelFetchRepos()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text, searchWord.count != 0 else { return }
-        let url = "https://api.github.com/search/repositories?q=\(searchWord)"
-        searchRepos = URLSession.shared.dataTask(with: URL(string: url)!) { [weak self] (data, res, err) in
-            if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                self?.repos = RepoData.mapData(obj)
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            }
+        presenter.fetchRepos(searchWord: searchWord)
+    }
+}
+
+extension SearchReposViewController: SearchReposViewDelegate {
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
-        // リストを更新する
-        searchRepos?.resume()
+    }
+    
+    func goDetailVC() {
+        performSegue(withIdentifier: presenter.repoDetailIdentifier, sender: self)
     }
 }
