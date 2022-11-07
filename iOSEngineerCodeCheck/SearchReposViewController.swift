@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ViewController: UITableViewController {
+final class SearchReposViewController: UITableViewController {
 
     @IBOutlet weak var SchBr: UISearchBar!
     
@@ -24,7 +24,7 @@ final class ViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "Detail", let dtl = segue.destination as? ViewController2 else { return }
+        guard segue.identifier == "Detail", let dtl = segue.destination as? RepoDetailViewController else { return }
         dtl.vc1 = self
     }
     
@@ -48,7 +48,7 @@ final class ViewController: UITableViewController {
     }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension SearchReposViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.text = ""
         return true
