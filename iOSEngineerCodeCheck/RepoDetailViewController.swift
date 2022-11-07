@@ -11,22 +11,19 @@ import UIKit
 final class RepoDetailViewController: UIViewController {
     
     @IBOutlet weak var ImgView: UIImageView!
-    
     @IBOutlet weak var TtlLbl: UILabel!
-    
     @IBOutlet weak var LangLbl: UILabel!
-    
     @IBOutlet weak var StrsLbl: UILabel!
     @IBOutlet weak var WchsLbl: UILabel!
     @IBOutlet weak var FrksLbl: UILabel!
     @IBOutlet weak var IsssLbl: UILabel!
     
-    var vc1: SearchReposViewController!
+    var searchRepoVC: SearchReposViewController!
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repo = vc1.repo[vc1.idx]
+        let repo = searchRepoVC.repo[searchRepoVC.idx]
         
         LangLbl.text = "Written in \(repo["language"] as? String ?? "")"
         StrsLbl.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
@@ -34,26 +31,20 @@ final class RepoDetailViewController: UIViewController {
         FrksLbl.text = "\(repo["forks_count"] as? Int ?? 0) forks"
         IsssLbl.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
         getImage()
-        
     }
     
-    func getImage(){
-        
-        let repo = vc1.repo[vc1.idx]
-        
+    private func getImage() {
+        let repo = searchRepoVC.repo[searchRepoVC.idx]
         TtlLbl.text = repo["full_name"] as? String
-        
-        if let owner = repo["owner"] as? [String: Any] {
-            if let imgURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-                    let img = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.ImgView.image = img
-                    }
-                }.resume()
+        guard let owner = repo["owner"] as? [String: Any], let imgURL = owner["avatar_url"] as? String else {
+            return
+        }
+        URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
+            let img = UIImage(data: data!)!
+            DispatchQueue.main.async {
+                self.ImgView.image = img
             }
         }
-        
+        .resume()
     }
-    
 }

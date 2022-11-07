@@ -25,7 +25,7 @@ final class SearchReposViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "Detail", let dtl = segue.destination as? RepoDetailViewController else { return }
-        dtl.vc1 = self
+        dtl.searchRepoVC = self
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
