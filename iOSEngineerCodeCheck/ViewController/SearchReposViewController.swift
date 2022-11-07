@@ -11,6 +11,13 @@ import UIKit
 final class SearchReposViewController: UITableViewController {
 
     @IBOutlet weak var SchBr: UISearchBar!
+    
+    private lazy var tableBackgroudLable: UILabel = {
+        let label = UILabel()
+        label.text = "検索結果がありません"
+        label.textAlignment = .center
+        return label
+    }()
         
     private var presenter: SearchReposPresenter!
     
@@ -28,6 +35,7 @@ final class SearchReposViewController: UITableViewController {
         
         SchBr.text = Strings.searchPlaceHolder.getText()
         SchBr.delegate = self
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,7 +43,7 @@ final class SearchReposViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let rp = presenter.cellViewData(at: indexPath.row)
         cell.textLabel?.text = rp.fullName
         cell.detailTextLabel?.text = rp.language
@@ -66,6 +74,11 @@ extension SearchReposViewController: UISearchBarDelegate {
 extension SearchReposViewController: SearchReposViewDelegate {
     func reloadData() {
         DispatchQueue.main.async {
+            if self.presenter.numberOfRows() == 0 {
+                self.tableView.backgroundView = self.tableBackgroudLable
+            } else {
+                self.tableView.backgroundView = nil
+            }
             self.tableView.reloadData()
         }
     }
@@ -74,9 +87,14 @@ extension SearchReposViewController: SearchReposViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let detailRepoVC = storyboard.instantiateViewController(identifier: VCIdentifiers.detailRepo.getId()) as? RepoDetailViewController,
               let repo = presenter.selectedRepo else {
+            showError(message: "画面の移動に失敗しました")
             return
         }
         detailRepoVC.assemble(repo: repo)
         navigationController?.pushViewController(detailRepoVC, animated: true)
+    }
+    
+    func fetchFailed(message: String) {
+        showError(message: message)
     }
 }

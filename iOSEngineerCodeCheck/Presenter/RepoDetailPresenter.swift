@@ -10,6 +10,7 @@ import Foundation
 
 protocol RepoDetailViewDelegate: AnyObject {
     func setImage(data: Data)
+    func fetchFailed(message: String)
 }
 
 final class RepoDetailPresenter: PresenterProtocol {
@@ -34,7 +35,8 @@ final class RepoDetailPresenter: PresenterProtocol {
             switch result {
             case .success(let data):
                 self?.view.setImage(data: data)
-            case .failure: break
+            case .failure(let error):
+                self?.view.fetchFailed(message: error.localizedDescription)
             }
         }
     }
@@ -44,22 +46,26 @@ final class RepoDetailPresenter: PresenterProtocol {
     }
     
     var starts: String {
-        "\(repo.stargazersCount) stars"
+        repo.stargazersCount.description
     }
     
     var watchers: String {
-        "\(repo.watchersCount) watchers"
+        repo.watchersCount.description
     }
     
     var forks: String {
-        "\(repo.forksCount) forks"
+        repo.forksCount.description
     }
     
     var issues: String {
-        "\(repo.openIssuesCount) open issues"
+        repo.openIssuesCount.description
     }
     
     var title: String {
         repo.fullName
+    }
+    
+    var gitLink: URL? {
+        URL(string: repo.htmlUrl)
     }
 }

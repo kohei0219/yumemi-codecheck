@@ -11,6 +11,7 @@ import Foundation
 protocol SearchReposViewDelegate: AnyObject {
     func reloadData()
     func goDetailVC()
+    func fetchFailed(message: String)
 }
 
 final class SearchReposPresenter: PresenterProtocol {
@@ -38,7 +39,8 @@ final class SearchReposPresenter: PresenterProtocol {
             case .success(let repos):
                 self?.repos = repos
                 self?.view.reloadData()
-            case .failure: break
+            case .failure(let error):
+                self?.view.fetchFailed(message: error.localizedDescription)
             }
         }
     }
