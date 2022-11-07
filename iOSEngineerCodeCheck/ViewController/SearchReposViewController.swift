@@ -35,6 +35,7 @@ final class SearchReposViewController: UITableViewController {
         
         SchBr.text = Strings.searchPlaceHolder.getText()
         SchBr.delegate = self
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

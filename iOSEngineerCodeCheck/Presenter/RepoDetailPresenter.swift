@@ -44,19 +44,19 @@ final class RepoDetailPresenter: PresenterProtocol {
     }
     
     var starts: String {
-        "\(repo.stargazersCount) stars"
+        "\(repo.stargazersCount)\nstars"
     }
     
     var watchers: String {
-        "\(repo.watchersCount) watchers"
+        "\(repo.watchersCount)\nwatchers"
     }
     
     var forks: String {
-        "\(repo.forksCount) forks"
+        "\(repo.forksCount)\nforks"
     }
     
     var issues: String {
-        "\(repo.openIssuesCount) open issues"
+        "\(repo.openIssuesCount)\nopen issues"
     }
     
     var title: String {

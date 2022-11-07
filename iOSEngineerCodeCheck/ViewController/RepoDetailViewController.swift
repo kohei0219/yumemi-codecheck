@@ -11,6 +11,19 @@ import UIKit
 final class RepoDetailViewController: UIViewController {
     
     @IBOutlet weak var ImgView: UIImageView!
+    @IBOutlet weak var ProfileBackgroundView: UIView! {
+        didSet {
+            // グラデーションをつけるが下に余白を作る（角丸のために）
+            self.ProfileBackgroundView.backgroundColor = .mainBlue
+            self.ProfileBackgroundView.profileGradation(
+                startColor: UIColor.white.cgColor,
+                endColor: UIColor.mainBlue.cgColor
+            )
+            // 下部を角丸に
+            self.ProfileBackgroundView.layer.cornerRadius = 32
+            self.ProfileBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        }
+    }
     @IBOutlet weak var TtlLbl: UILabel!
     @IBOutlet weak var LangLbl: UILabel!
     @IBOutlet weak var StrsLbl: UILabel!
@@ -45,7 +58,7 @@ extension RepoDetailViewController: RepoDetailViewDelegate {
     func setImage(data: Data) {
         guard let img = UIImage(data: data) else { return }
         DispatchQueue.main.async {
-            self.ImgView.image = img
+            self.ImgView.image = img.roundImage()
         }
     }
 }
