@@ -9,7 +9,7 @@
 import XCTest
 @testable import iOSEngineerCodeCheck
 
-final class SearchReposViewControllerTests: XCTestCase {
+final class  SearchAndDetailRepoUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
     }
