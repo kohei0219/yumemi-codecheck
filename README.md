@@ -2,45 +2,65 @@
 
 ## 概要
 
-本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に iOS エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の概要を詳しく読んだ上で課題を取り組んでください。
+株式会社ゆめみのiOS エンジニア職に対して出された課題です。[元のサイト](https://github.com/yumemi-inc/ios-engineer-codecheck)
 
 ## アプリ仕様
 
 本アプリは GitHub のリポジトリーを検索するアプリです。
 
-![動作イメージ](README_Images/app.gif)
+<img src="https://user-images.githubusercontent.com/36535072/200465834-141b265c-9229-42f0-812c-5b8f04d396b1.gif" width="240px">
+
 
 ### 環境
 
-- IDE：基本最新の安定版（本概要更新時点では Xcode 13.0）
-- Swift：基本最新の安定版（本概要更新時点では Swift 5.5）
-- 開発ターゲット：基本最新の安定版（本概要更新時点では iOS 15.0）
-- サードパーティーライブラリーの利用：オープンソースのものに限り制限しない
+- IDE：Xcode 13.4.1
+- Swift：Swift 5.6.1
+- 開発ターゲット：iOS 15.0
+- サードパーティーライブラリーの利用：していない
 
 ### 動作
 
 1. 何かしらのキーワードを入力
 2. GitHub API（`search/repositories`）でリポジトリーを検索し、結果一覧を概要（リポジトリ名）で表示
-3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示
+3. 右上のボタンで検索結果をソートできる
+4. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示
+5. Visitボタンを押すことで該当のリポジトリに行くことができる
 
-## 課題取り組み方法
+## 課題で力をいれたこと
 
-Issues を確認した上、本プロジェクトを [**Duplicate** してください](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository)（Fork しないようにしてください。必要ならプライベートリポジトリーにしても大丈夫です）。今後のコミットは全てご自身のリポジトリーで行ってください。
+### アーキテクチャ
+MVPを採用しました。画面の数、機能が多くないので十分に開発できると考えたのでMVPを使用することに決めました。
 
-コードチェックの課題 Issue は全て [`課題`](https://github.com/yumemi/ios-engineer-codecheck/milestone/1) Milestone がついており、難易度に応じて Label が [`初級`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A初級+milestone%3A課題)、[`中級`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A中級+milestone%3A課題+) と [`ボーナス`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3Aボーナス+milestone%3A課題+) に分けられています。課題の必須／選択は下記の表とします：
+### テスト
+UnitTestは検索画面に対してのみ書きました。普段はMockoloでモックを作成し、StaubKitでダミーデータを作成しています。
+UIテストは検索画面からスタートして詳細画面までテストできる形にしました。
 
-|   | 初級 | 中級 | ボーナス
-|--:|:--:|:--:|:--:|
-| 新卒／未経験者 | 必須 | 選択 | 選択 |
-| 中途／経験者 | 必須 | 必須 | 選択 |
+### コード
+- できるだけ共通して使えるところはまとめました。
+- 色や文字列の情報は共通して使うものなので簡単に呼び出せるようにしました。
+- apiから取得してきたデータを使いやすいようにstructを作成しました。
+- 必ずPresenterはviewを持っていてほしいのでunownedで定義しました。
+- 検索、詳細画面でのデータの受け渡し方を安全にしました。
 
+### デザイン
 
-課題 Issueをご自身のリポジトリーにコピーするGitHub Actionsをご用意しております。  
-[こちらのWorkflow](./.github/workflows/copy-issues.yml)を[手動でトリガーする](https://docs.github.com/ja/actions/managing-workflow-runs/manually-running-a-workflow)ことでコピーできますのでご活用下さい。
+#### 検索画面
+- 検索画面に関しては、画面のタイトルとnavbarの色を調整しました。
 
-課題が完成したら、リポジトリーのアドレスを教えてください。
+#### 詳細画面
+- 詳細画面のnavbarの戻るボタンのタイトルは消した方が良いと思ったので消しました。
+- 背景をグラデーションにしてリッチな雰囲気を出しました。
+- 下部のみに角丸をつけました。（グラデーションと被らないように工夫しました）
+- navbarの背景にも色が透過されて見えるようにしました。
+- 影を加えることで立体感を出しました。
 
-## 参考記事
+### UX
+全体的にエラーのハンドリングを追加しました。
 
-提出された課題の評価ポイントに関しては、[こちらの記事](https://qiita.com/lovee/items/d76c68341ec3e7beb611)に詳しく書かれてありますので、ぜひご覧ください。
-ライブラリの利用に関しては [こちらの記事](https://qiita.com/ykws/items/b951a2e24ca85013e722)も参照ください。
+#### 検索画面
+- 検索結果がないときに伝える機能を作成しました。
+- ソートボタンは説明を加えないようにしてタップしてもらうことで気づいてもらえると考えました。
+
+#### 詳細画面
+- それぞれのデータを見やすい形に加工して表示しました。
+- リポジトリに遷移するボタンは下部に配置することで押しやすさにこだわりました。
