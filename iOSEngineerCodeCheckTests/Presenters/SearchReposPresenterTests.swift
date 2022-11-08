@@ -81,17 +81,17 @@ final class SearchReposPresenterTests: XCTestCase {
         XCTAssertEqual(view.goDetailVCCallCount, 1)
     }
     
-    func test_updateSortStatus() {
+    func test_didTapSort() {
         XCTAssertEqual(presenter.sortStatus, .stars)
-        presenter.updateSortStatus()
+        presenter.didTapSort()
         XCTAssertEqual(presenter.sortStatus, .issues)
         XCTAssertEqual(view.reloadDataCallCount, 1)
         XCTAssertEqual(view.updateSortTitleCallCount, 1)
-        presenter.updateSortStatus()
+        presenter.didTapSort()
         XCTAssertEqual(presenter.sortStatus, .watchers)
-        presenter.updateSortStatus()
+        presenter.didTapSort()
         XCTAssertEqual(presenter.sortStatus, .forks)
-        presenter.updateSortStatus()
+        presenter.didTapSort()
         XCTAssertEqual(presenter.sortStatus, .stars)
     }
 }

@@ -61,7 +61,7 @@ final class SearchReposViewController: UITableViewController {
     }
     
     @IBAction func didTapSort(_ sender: Any) {
-        presenter.updateSortStatus()
+        presenter.didTapSort()
     }
 }
 
