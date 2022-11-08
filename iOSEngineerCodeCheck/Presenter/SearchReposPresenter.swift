@@ -72,7 +72,7 @@ final class SearchReposPresenter: PresenterProtocol {
         view.goDetailVC()
     }
     
-    func sortRepos() {
+    private func sortRepos() {
         switch sortStatus {
         case .stars:
             repos.sort { $0.stargazersCount > $1.stargazersCount }
@@ -85,7 +85,7 @@ final class SearchReposPresenter: PresenterProtocol {
         }
     }
     
-    func updateSortStatus() {
+    func didTapSort() {
         switch sortStatus {
         case .stars:
             sortStatus = .issues

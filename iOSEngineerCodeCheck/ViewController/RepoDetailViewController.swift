@@ -18,10 +18,7 @@ final class RepoDetailViewController: UIViewController {
             self.ProfileBackgroundView.layer.cornerRadius = 32
             self.ProfileBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
             //　影をつける
-            self.ProfileBackgroundView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            self.ProfileBackgroundView.layer.shadowColor = UIColor.black.cgColor
-            self.ProfileBackgroundView.layer.shadowOpacity = 0.6
-            self.ProfileBackgroundView.layer.shadowRadius = 4
+            self.ProfileBackgroundView.addShadow()
         }
     }
     @IBOutlet weak var TtlLbl: UILabel!
@@ -32,10 +29,7 @@ final class RepoDetailViewController: UIViewController {
     @IBOutlet weak var IsssLbl: UILabel!
     @IBOutlet weak var VisitButton: UIButton! {
         didSet {
-            self.VisitButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            self.VisitButton.layer.shadowColor = UIColor.black.cgColor
-            self.VisitButton.layer.shadowOpacity = 0.6
-            self.VisitButton.layer.shadowRadius = 4
+            self.VisitButton.addShadow()
         }
     }
     
@@ -104,5 +98,14 @@ extension RepoDetailViewController: RepoDetailViewDelegate {
     
     func fetchFailed(message: String) {
         showError(message: message)
+    }
+}
+
+fileprivate extension UIView {
+    func addShadow() {
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.6
+        self.layer.shadowRadius = 4
     }
 }
